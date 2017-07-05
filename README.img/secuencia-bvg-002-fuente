@@ -1,0 +1,55 @@
+@startuml
+skinparam roundcorner 20
+skinparam sequenceArrowThickness 1
+
+actor Cliente #blue
+activate Cliente #gray
+"Cliente" -> "Comercio": Decide pagar con BVG
+    activate Comercio #gray
+    
+    "Comercio" -> "BVG" : Solicitud opciones de pago (Discover)
+        activate BVG #gray
+    "BVG" --> "Comercio" : Respuesta: Tarjetas y Bancos
+        deactivate BVG
+        
+"Comercio" --> "Cliente" : Muestra opciones de pago
+"Cliente" -> "Comercio" : Elige opción de pago
+    
+    "Comercio" -> "BVG" : Pedido de autorización (Transaction)
+        activate BVG #gray
+    "BVG" --> "Comercio" : Respuesta
+        deactivate BVG
+        
+"Comercio" --> "Cliente" : Levanta Formulario    
+
+create "Formulario"
+"Cliente" -> "Formulario" : Login
+activate Formulario #gray
+"Formulario" --> "Cliente" : Muestra billetera
+"Cliente" -> "Formulario" : Selecciona Tarjeta
+"Formulario" -> "Comercio" : Devuelve Token
+deactivate Formulario
+destroy Formulario
+
+    "Comercio" -> "Gateway" : Realiza pago con el Token
+        activate Gateway #gray
+    "Gateway" --> "Comercio" : Responde resultado del pago    
+        deactivate Gateway
+        
+    "Comercio" -> "BVG" : Informa resultado del pago (PushNotify)
+        activate BVG #gray
+    "BVG" --> "Comercio" 
+        deactivate BVG
+        
+"Comercio" --> "Cliente" : Muestra resultado del pago 
+deactivate Comercio
+
+deactivate Cliente
+@enduml
+
+------------------
+
+ref:
+----
+editor:https://www.planttext.com/
+doc:http://plantuml.com/
