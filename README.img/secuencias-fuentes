@@ -1,0 +1,197 @@
+Getcredential
+-------------
+
+@startuml
+skinparam roundcorner 20
+skinparam sequenceArrowThickness 1
+
+actor Browser #blue
+"Browser" -> "E-commerce" : Solicíta credenciales de Todopago
+    activate Browser #gray
+    activate "E-commerce" #gray
+
+    "E-commerce" -> "SDK" : getCredentials()
+        activate "SDK" #gray
+        
+        "SDK" -> "Todo Pago"
+        activate "Todo Pago" #gray
+        "Todo Pago" --> "SDK"            
+        deactivate "Todo Pago"        
+        
+    "SDK" --> "E-commerce"
+        note right: Devuelve array con las credenciales
+        deactivate "SDK"
+        
+"E-commerce" --> "Browser" 
+    note right: Persiste las credenciales de Todo pago
+    deactivate "E-commerce"
+
+deactivate Browser
+@enduml
+
+
+
+status
+------
+@startuml
+skinparam roundcorner 20
+skinparam sequenceArrowThickness 1
+
+actor Browser #blue
+"Browser" -> "E-commerce" : Solicíta el estado de una transaccion
+    activate Browser #gray
+    activate "E-commerce" #gray
+
+    "E-commerce" -> "SDK" : getStatus()
+        activate "SDK" #gray
+        
+        "SDK" -> "Todo Pago"
+        activate "Todo Pago" #gray
+        "Todo Pago" --> "SDK"            
+        deactivate "Todo Pago"        
+        
+    "SDK" --> "E-commerce"
+        note right: Devuelve array con la informacion de la operacion
+        deactivate "SDK"
+        
+"E-commerce" --> "Browser" 
+    deactivate "E-commerce"
+
+deactivate Browser
+@enduml
+
+
+
+getbyrange:
+-----------
+
+@startuml
+skinparam roundcorner 20
+skinparam sequenceArrowThickness 1
+
+actor Browser #blue
+"Browser" -> "E-commerce" : Solicíta un listado de operaciones por fecha
+    activate Browser #gray
+    activate "E-commerce" #gray
+
+    "E-commerce" -> "SDK" : getByRangeDateTime()
+        activate "SDK" #gray
+        
+        "SDK" -> "Todo Pago"
+        activate "Todo Pago" #gray
+        "Todo Pago" --> "SDK"            
+        deactivate "Todo Pago"        
+        
+    "SDK" --> "E-commerce"
+        note right: Devuelve array con el listado de operacion
+        deactivate "SDK"
+        
+"E-commerce" --> "Browser" 
+    deactivate "E-commerce"
+
+deactivate Browser
+@enduml
+
+
+
+discoverpaymentmethods:
+-----------------------
+
+@startuml
+skinparam roundcorner 20
+skinparam sequenceArrowThickness 1
+
+actor Browser #blue
+"Browser" -> "E-commerce" : Solicíta los medios de pagos disponibles
+    activate Browser #gray
+    activate "E-commerce" #gray
+
+    "E-commerce" -> "SDK" : discoverPaymentMethods()
+        activate "SDK" #gray
+        
+        "SDK" -> "Todo Pago"
+        activate "Todo Pago" #gray
+        "Todo Pago" --> "SDK"            
+        deactivate "Todo Pago"        
+        
+    "SDK" --> "E-commerce"
+        note right: Devuelve array los medios de pagos disponibles
+        deactivate "SDK"
+        
+"E-commerce" --> "Browser" 
+    deactivate "E-commerce"
+
+deactivate Browser
+@enduml
+
+
+
+devolucion parcial:
+-------------------
+
+@startuml
+skinparam roundcorner 20
+skinparam sequenceArrowThickness 1
+
+actor Browser #blue
+"Browser" -> "E-commerce" : Solicíta una devolucion parcial
+    activate Browser #gray
+    activate "E-commerce" #gray
+
+    "E-commerce" -> "SDK" : returnRequest()
+        activate "SDK" #gray
+        
+        "SDK" -> "Todo Pago"
+        activate "Todo Pago" #gray
+        "Todo Pago" --> "SDK"            
+        deactivate "Todo Pago"        
+        
+    "SDK" --> "E-commerce"
+        note right: Devuelve array con el estado de la operación
+        deactivate "SDK"
+        
+"E-commerce" --> "Browser" 
+    deactivate "E-commerce"
+
+deactivate Browser
+@enduml
+
+
+devolucion total
+----------------
+
+@startuml
+skinparam roundcorner 20
+skinparam sequenceArrowThickness 1
+
+actor Browser #blue
+"Browser" -> "E-commerce" : Solicíta una devolucion total
+    activate Browser #gray
+    activate "E-commerce" #gray
+
+    "E-commerce" -> "SDK" : voidRequest()
+        activate "SDK" #gray
+        
+        "SDK" -> "Todo Pago"
+        activate "Todo Pago" #gray
+        "Todo Pago" --> "SDK"            
+        deactivate "Todo Pago"        
+        
+    "SDK" --> "E-commerce"
+        note right: Devuelve array con el estado de la operación
+        deactivate "SDK"
+        
+"E-commerce" --> "Browser" 
+    deactivate "E-commerce"
+
+deactivate Browser
+@enduml
+
+
+--------------------------
+
+ref:
+editor: https://www.planttext.com/
+documentacion: http://plantuml.com/
+
+
