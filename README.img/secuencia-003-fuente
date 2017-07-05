@@ -16,10 +16,10 @@ actor Browser #blue
             activate "SDK" #DarkSalmon
             deactivate "SDK"
 
-        "SDK" -> "Gateway" : AuthorizeRequest()
-            activate Gateway #gray
-        "Gateway" --> "SDK"
-            deactivate Gateway
+        "SDK" -> "Todo Pago" : AuthorizeRequest()
+            activate "Todo Pago" #gray
+        "Todo Pago" --> "SDK"
+            deactivate "Todo Pago"
 
         "SDK" -> "SDK" : parseAuthorizeRequest\nResponse(AuthorizeRequestResponse):Array 
             activate "SDK" #DarkSalmon
@@ -35,12 +35,12 @@ actor Browser #blue
     deactivate "E-commerce"
 
 
-"Browser" -> "Gateway" :
-    activate Gateway #gray
+"Browser" -> "Todo Pago" :
+    activate "Todo Pago" #gray
     note right: Completa el formulario y\n realiza un llamado al gateway
-"Gateway" --> "Browser"
-    note right: El Gateway redirige al Browser con la\n url del checkout del E-commerce.
-    deactivate Gateway
+"Todo Pago" --> "Browser"
+    note right: El Todo Pago redirige al Browser con la\n url del checkout del E-commerce.
+    deactivate "Todo Pago"
 
 
 "Browser" -> "E-commerce"
@@ -54,10 +54,10 @@ actor Browser #blue
             activate SDK #DarkSalmon
             deactivate SDK
 
-        "SDK" -> "Gateway": AuthorizeAnswer()
-            activate Gateway #gray
-        "Gateway" --> "SDK"
-            deactivate Gateway
+        "SDK" -> "Todo Pago": AuthorizeAnswer()
+            activate "Todo Pago" #gray
+        "Todo Pago" --> "SDK"
+            deactivate "Todo Pago"
             
         "SDK" -> "SDK" : parseAuthorizeAnswer\nResponse(Authorize AnswerResponse): Array
             note right: Parsea los datos para mostrar\n al E-commerce de manera prolija
