@@ -1,13 +1,14 @@
 Getcredential
 -------------
+https://raw.githubusercontent.com/TodoPago/imagenes/master/README.img/secuencia-credenciales.jpg
 
 @startuml
 skinparam roundcorner 20
 skinparam sequenceArrowThickness 1
 
-actor Browser #blue
-"Browser" -> "E-commerce" : Solicíta credenciales de Todopago
-    activate Browser #gray
+actor User #blue
+"User" -> "E-commerce" : Solicíta credenciales de Todopago
+    activate User #gray
     activate "E-commerce" #gray
 
     "E-commerce" -> "SDK" : getCredentials()
@@ -22,24 +23,26 @@ actor Browser #blue
         note right: Devuelve array con las credenciales
         deactivate "SDK"
         
-"E-commerce" --> "Browser" 
+"E-commerce" --> "User" 
     note right: Persiste las credenciales de Todo pago
     deactivate "E-commerce"
 
-deactivate Browser
+deactivate User
 @enduml
 
 
 
 status
 ------
+https://raw.githubusercontent.com/TodoPago/imagenes/master/README.img/secuencia-status.jpg
+
 @startuml
 skinparam roundcorner 20
 skinparam sequenceArrowThickness 1
 
-actor Browser #blue
-"Browser" -> "E-commerce" : Solicíta el estado de una transaccion
-    activate Browser #gray
+actor User #blue
+"User" -> "E-commerce" : Solicíta el estado de una transaccion
+    activate User #gray
     activate "E-commerce" #gray
 
     "E-commerce" -> "SDK" : getStatus()
@@ -54,24 +57,24 @@ actor Browser #blue
         note right: Devuelve array con la informacion de la operacion
         deactivate "SDK"
         
-"E-commerce" --> "Browser" 
+"E-commerce" --> "User" 
     deactivate "E-commerce"
 
-deactivate Browser
+deactivate User
 @enduml
-
 
 
 getbyrange:
 -----------
+https://raw.githubusercontent.com/TodoPago/imagenes/master/README.img/secuencia-getoperations.jpg
 
 @startuml
 skinparam roundcorner 20
 skinparam sequenceArrowThickness 1
 
-actor Browser #blue
-"Browser" -> "E-commerce" : Solicíta un listado de operaciones por fecha
-    activate Browser #gray
+actor User #blue
+"User" -> "E-commerce" : Solicíta un listado de operaciones por fecha
+    activate User #gray
     activate "E-commerce" #gray
 
     "E-commerce" -> "SDK" : getByRangeDateTime()
@@ -86,24 +89,26 @@ actor Browser #blue
         note right: Devuelve array con el listado de operacion
         deactivate "SDK"
         
-"E-commerce" --> "Browser" 
+"E-commerce" --> "User" 
     deactivate "E-commerce"
 
-deactivate Browser
+deactivate User
 @enduml
+
 
 
 
 discoverpaymentmethods:
 -----------------------
+https://raw.githubusercontent.com/TodoPago/imagenes/master/README.img/secuencia-paymentmethods.jpg
 
 @startuml
 skinparam roundcorner 20
 skinparam sequenceArrowThickness 1
 
-actor Browser #blue
-"Browser" -> "E-commerce" : Solicíta los medios de pagos disponibles
-    activate Browser #gray
+actor User #blue
+"User" -> "E-commerce" : Solicíta los medios de pagos disponibles
+    activate User #gray
     activate "E-commerce" #gray
 
     "E-commerce" -> "SDK" : discoverPaymentMethods()
@@ -118,24 +123,25 @@ actor Browser #blue
         note right: Devuelve array los medios de pagos disponibles
         deactivate "SDK"
         
-"E-commerce" --> "Browser" 
+"E-commerce" --> "User" 
     deactivate "E-commerce"
 
-deactivate Browser
+deactivate User
 @enduml
 
 
 
 devolucion parcial:
 -------------------
+https://raw.githubusercontent.com/TodoPago/imagenes/master/README.img/secuencia-devolucion-parcial.jpg
 
 @startuml
 skinparam roundcorner 20
 skinparam sequenceArrowThickness 1
 
-actor Browser #blue
-"Browser" -> "E-commerce" : Solicíta una devolucion parcial
-    activate Browser #gray
+actor User #blue
+"User" -> "E-commerce" : Solicíta una devolucion parcial
+    activate User #gray
     activate "E-commerce" #gray
 
     "E-commerce" -> "SDK" : returnRequest()
@@ -150,23 +156,24 @@ actor Browser #blue
         note right: Devuelve array con el estado de la operación
         deactivate "SDK"
         
-"E-commerce" --> "Browser" 
+"E-commerce" --> "User" 
     deactivate "E-commerce"
 
-deactivate Browser
+deactivate User
 @enduml
 
 
 devolucion total
 ----------------
+https://raw.githubusercontent.com/TodoPago/imagenes/master/README.img/secuencia-devolucion-total.jpg
 
 @startuml
 skinparam roundcorner 20
 skinparam sequenceArrowThickness 1
 
-actor Browser #blue
-"Browser" -> "E-commerce" : Solicíta una devolucion total
-    activate Browser #gray
+actor User #blue
+"User" -> "E-commerce" : Solicíta una devolucion total
+    activate User #gray
     activate "E-commerce" #gray
 
     "E-commerce" -> "SDK" : voidRequest()
@@ -181,10 +188,10 @@ actor Browser #blue
         note right: Devuelve array con el estado de la operación
         deactivate "SDK"
         
-"E-commerce" --> "Browser" 
+"E-commerce" --> "User" 
     deactivate "E-commerce"
 
-deactivate Browser
+deactivate User
 @enduml
 
 
