@@ -31,10 +31,10 @@ activate Formulario #gray
 deactivate Formulario
 destroy Formulario
 
-    "Comercio" -> "Gateway" : Realiza pago con el Token
-        activate Gateway #gray
-    "Gateway" --> "Comercio" : Responde resultado del pago    
-        deactivate Gateway
+    "Comercio" -> "Todo Pago" : Realiza pago con el Token
+        activate "Todo Pago" #gray
+    "Todo Pago" --> "Comercio" : Responde resultado del pago    
+        deactivate "Todo Pago"
         
     "Comercio" -> "BVG" : Informa resultado del pago (PushNotify)
         activate BVG #gray
@@ -46,6 +46,7 @@ deactivate Comercio
 
 deactivate Cliente
 @enduml
+
 
 ------------------
 
