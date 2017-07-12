@@ -1,3 +1,4 @@
+
 @startuml
 skinparam roundcorner 20
 skinparam sequenceArrowThickness 1
@@ -15,7 +16,11 @@ actor User #blue
             note right: Parsea array al formato requerido\n para el Webservice
             activate "SDK" #DarkSalmon
             deactivate "SDK"
-
+        "SDK" --> "Google Maps" : setGoogleClient(): Object
+            note right: [Habilitado por el admin] Envía a Google Maps los \ndatos parseados para que los normalice
+            activate "Google Maps" #DarkSalmon
+        "Google Maps" -> "SDK"
+            deactivate "Google Maps"
         "SDK" -> "Todo Pago" : AuthorizeRequest()
             activate "Todo Pago" #gray
         "Todo Pago" --> "SDK"
@@ -75,10 +80,3 @@ deactivate "E-commerce" #gray
 
 deactivate User
 @enduml
-
-
---------------------------
-
-ref:
-editor: https://www.planttext.com/
-documentacion: http://plantuml.com/
