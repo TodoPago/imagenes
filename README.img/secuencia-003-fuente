@@ -1,4 +1,3 @@
-
 @startuml
 skinparam roundcorner 20
 skinparam sequenceArrowThickness 1
@@ -9,15 +8,15 @@ actor User #blue
     activate User #gray
     activate "E-commerce" #gray
 
-    "E-commerce" -> "SDK" : SendAuthorizeRequest(Array): Array
+   "E-commerce" -> "SDK" : SendAuthorizeRequest(Array): Array
         activate "SDK" #gray
 
-        "SDK" -> "SDK" : parseAuthorizeRequest(): Array
+       "SDK" -> "SDK" : parseAuthorizeRequest(): Array
             note right: Parsea array al formato requerido\n para el Webservice
             activate "SDK" #DarkSalmon
             deactivate "SDK"
         "SDK" --> "Google Maps" : setGoogleClient(): Object
-            note right: [Habilitado por el admin] Envía a Google Maps los \ndatos parseados para que los normalice
+            note right: [Habilitado por el admin] Envía a Google Maps los \ndatos parseados de la direcciones para normalizarlas
             activate "Google Maps" #DarkSalmon
         "Google Maps" -> "SDK"
             deactivate "Google Maps"
@@ -26,16 +25,16 @@ actor User #blue
         "Todo Pago" --> "SDK"
             deactivate "Todo Pago"
 
-        "SDK" -> "SDK" : parseAuthorizeRequest\nResponse(AuthorizeRequestResponse):Array 
+       "SDK" -> "SDK" : parseAuthorizeRequest\nResponse(AuthorizeRequestResponse):Array
             activate "SDK" #DarkSalmon
             deactivate "SDK"
             note left: Parsea los datos recibidos\n por el Werservice para poder\n utilizar la url del gateway\n de pago y RequestKey
             
-    "SDK" --> "E-commerce"
+   "SDK" --> "E-commerce"
         note right: El E-commerce si la respuesta es OK,\n recibe y persiste un array\n con la url de pago, RequestKey\n y tambien devuelve el Token del mismo
         deactivate "SDK"
         
-"E-commerce" --> "Browser" 
+"E-commerce" --> "Browser"
     note right: Redirecciona al formulario de pago
     deactivate "E-commerce"
 
@@ -44,7 +43,7 @@ actor User #blue
     activate "Todo Pago" #gray
     note right: Completa el formulario y\n realiza un llamado al gateway
 "Todo Pago" --> "User"
-    note right: El Todo Pago redirige al Browser con la\n url del checkout del E-commerce.
+    note right: Todo Pago redirige al Browser con la\n url del checkout del E-commerce.
     deactivate "Todo Pago"
 
 
@@ -54,24 +53,24 @@ actor User #blue
     "E-commerce" -> "SDK" : getAuthorize(Array): Array
         activate SDK #gray
         
-        "SDK" -> "SDK" : parseAuthorizeAnswer(Array)
-            note right: Parsea datos al formato\n requerido por el Webservice   
+       "SDK" -> "SDK" : parseAuthorizeAnswer(Array)
+            note right: Parsea datos al formato\n requerido por el Webservice  
             activate SDK #DarkSalmon
             deactivate SDK
 
-        "SDK" -> "Todo Pago": AuthorizeAnswer()
+       "SDK" -> "Todo Pago": AuthorizeAnswer()
             activate "Todo Pago" #gray
         "Todo Pago" --> "SDK"
             deactivate "Todo Pago"
             
-        "SDK" -> "SDK" : parseAuthorizeAnswer\nResponse(Authorize AnswerResponse): Array
+       "SDK" -> "SDK" : parseAuthorizeAnswer\nResponse(Authorize AnswerResponse): Array
             note right: Parsea los datos para mostrar\n al E-commerce de manera prolija
             activate SDK #DarkSalmon
             deactivate SDK
         
-    "SDK" --> "E-commerce"
+   "SDK" --> "E-commerce"
         deactivate SDK
-        note right: Recibe la respuesta de la\n confirmacion de transaccion
+        note right: Recibe la respuesta de la\n confirmación de transaccion
         
 "E-commerce" --> "User"
     deactivate "E-commerce"
